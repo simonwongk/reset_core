@@ -1,0 +1,28 @@
+<div class="titleU">__('Add a Note to') ID: {row.id}</div>
+
+{_form}
+<!-- IF row.title -->
+	<div class="form-group row">
+		<label class="col-1">__('Title'):</label>
+		<div class="col-11">
+			{row.title}
+		</div>
+	</div>
+<!-- ENDIF -->
+
+	<div class="form-group row">
+		<label class="col-1">__('Note'):</label>
+		<div class="col-11">
+			<input name="ps" placeholder="Note content" autofocus />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success"><i class="fa fa-sticky-note-o"></i> __('Add Note')</button>
+</form>
+
+<!-- BEGIN ps_list -->
+<div class="border-bottom border-secondary pt-3 mx-5">
+	<strong>{truename}</strong> {info} <span class="desc">{dateline_DATE_m/d/Y H:i}</span>
+	<!-- IF _can_del --><a href="/{p}/{ref_id}/ps?step=delete&fid={id}" class="text-danger badge badge-warning cfm">X</a><!-- ENDIF -->
+</div>
+<!-- END -->

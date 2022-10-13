@@ -1,0 +1,104 @@
+<div class="d-flex title_bar">
+	<div class="font-weight-bold">
+		<i class="fa fa-user-circle-o"></i> Backend Admin List
+	</div>
+
+	<div class="ml-auto mr-4">
+		{_form_search}
+		<div class="position-relative">
+			<input type="text" class="search_field" name="o00" value="{o00}" placeholder="Name/ID" noStyle>
+			<button type="submit" class="search_btn" noStyle><i class="fa fa-search"></i></button>
+		</div>
+		</form>
+	</div>
+
+	{_cols_filters}
+
+	<div class="mr-3">{_cols_diy}</div>
+</div>
+
+<div class="d-flex mb-3 mt-3">
+	<div class="mr-3">
+		<button type="button" class="btn btn-sm btn-secondary" disabled data-batch_btn="admin" data-target="modal" data-action="/{p}?modal=1&action=batch" noLoading>Batch Operation <span data-batch_count="admin"></span></button>
+	</div>
+
+	{curr_filters}
+
+	<div class="mx-3">
+		Total: <b>{total}</b>
+	</div>
+
+	<div class="ml-auto">
+		<a href="/{p}/add" class="btn btn-primary btn-sm ml-3" accesskey="A"><i class="fa fa-plus"></i> Add</a>
+	</div>
+
+	<div class="ml-4">
+		{pagelink}
+	</div>
+
+	<div class="ml-1">
+		<div class="btn-group btn-group-sm">
+			<a href='/{p}?s95=1&o95=1' class="btn btn-outline-secondary<!-- IF o95=="1" --> active<!-- ENDIF -->">Trash</a>
+			<a href='/{p}?s95=1&o95=2' class="btn btn-outline-secondary<!-- IF o95=="2" --> active<!-- ENDIF -->">All</a>
+		</div>
+	</div>
+</div>
+
+<table class="table table-bordered table-hover table-sm col_diy">
+	<thead><tr class="table-secondary">
+		<th class="py-3 border-light">
+			<input type="checkbox" data-batch-all="admin" />
+		</th>
+		<!-- BEGIN cols_list -->
+			<!-- IF _col=="i" --><th class="py-3 border-light">#</th><!-- ENDIF -->
+			<!-- IF _col=="id" --><th class="py-3 border-left border-light">
+				<a href="/{p}?s01=1&o01=id&o01order=<!-- IF o01link=="id.desc" -->asc<!-- ELSEIF o01link=="id.asc" -->desc<!-- ENDIF -->" data-title="Click to order by ID">ID</a><!-- IF o01link=="id.desc" -->↓<!-- ELSEIF o01link=="id.asc" -->↑<!-- ENDIF -->
+			</th><!-- ENDIF -->
+			<!-- IF _col=="truename" --><th class="py-3 border-left border-light">Truename</th><!-- ENDIF -->
+			<!-- IF _col=="menu" --><th class="py-3 border-left border-light">Menu</th><!-- ENDIF -->
+			<!-- IF _col=="privilege" --><th class="py-3 border-left border-light">Privilege</th><!-- ENDIF -->
+			<!-- IF _col=="group" --><th class="py-3 border-left border-light">Group</th><!-- ENDIF -->
+			<!-- IF _col=="activity" --><th class="py-3 border-left border-light">Activity</th><!-- ENDIF -->
+			<!-- IF _col=="note" --><th class="py-3 border-left border-light">Note</th><!-- ENDIF -->
+			<!-- IF _col=="created" --><th class="py-3 border-left border-light">
+				<a href="/{p}?s01=1&o01=dateline&o01order=<!-- IF o01link=="dateline.desc" -->asc<!-- ELSEIF o01link=="dateline.asc" -->desc<!-- ENDIF -->" data-title="Click to order by">Created</a><!-- IF o01link=="dateline.desc" -->↓<!-- ELSEIF o01link=="dateline.asc" -->↑<!-- ENDIF -->
+			</th><!-- ENDIF -->
+			<!-- IF _col=="updated" --><th class="py-3 border-left border-light">
+				<a href="/{p}?s01=1&o01=lastdateline&o01order=<!-- IF o01link=="lastdateline.desc" -->asc<!-- ELSEIF o01link=="lastdateline.asc" -->desc<!-- ENDIF -->" data-title="Click to order by">Updated</a><!-- IF o01link=="lastdateline.desc" -->↓<!-- ELSEIF o01link=="lastdateline.asc" -->↑<!-- ENDIF -->
+			</th><!-- ENDIF -->
+			<!-- IF _col_custom -->{_col_th}<!-- ENDIF -->
+		<!-- END -->
+	</tr></thead>
+	<tbody>
+<!-- BEGIN list -->
+	<tr data-batch <!-- IF active!="1" --> class="alert alert-danger" title="Locked"<!-- ENDIF -->>
+		<td>
+			<input data-batch='admin' type="checkbox" name="ids[]" value="{id}" noStyle />
+		</td>
+		<!-- BEGIN cols_list -->
+			<!-- IF _col=="i" --><td><a href="/{p}/{id}">{i}</a></td><!-- ENDIF -->
+			<!-- IF _col=="id" --><td data-click_to_copy>{id}</td><!-- ENDIF -->
+			<!-- IF _col=="truename" --><td class="custom_col custom_title">
+				<!-- IF root --><span class='badge badge-danger'>Full ROOT</span><!-- ENDIF -->
+				<a href="/{p}/{id}" data-accesskey-i>{truename}<!-- IF _diffname -->/{idname}<!-- ENDIF --></a>
+			</td><!-- ENDIF -->
+			<!-- IF _col=="menu" --><td><!-- BEGIN privilege --><span class="badge badge-info ml-1">{title}</span><!-- END --></td><!-- ENDIF -->
+			<!-- IF _col=="privilege" --><td><!-- BEGIN priv_tags -->{title} <!-- END --></td><!-- ENDIF -->
+			<!-- IF _col=="group" --><td><!-- BEGIN admin_tags -->{title} <!-- END --></td><!-- ENDIF -->
+			<!-- IF _col=="activity" --><td><!-- IF last_act_dateline -->{last_act_dateline_DATE_m/d/y} {ip}<!-- ELSE -->N/A<!-- ENDIF --></td><!-- ENDIF -->
+			<!-- IF _col=="note" --><td>{ps}</td><!-- ENDIF -->
+			<!-- IF _col=="created" --><td>{dateline_DATE_m/d/y H:i}</td><!-- ENDIF -->
+			<!-- IF _col=="updated" --><td>{lastdateline_DATE_m/d/y H:i}</td><!-- ENDIF -->
+			<!-- IF _col_custom -->{_col_td}<!-- ENDIF -->
+		<!-- END -->
+	</tr>
+<!-- END -->
+	</tbody>
+</table>
+<!-- IF !list -->
+<h2 class="text-center">
+	No list
+</h2>
+<!-- ENDIF -->
+
+<div class="d-flex justify-content-center">{pagelink}</div>

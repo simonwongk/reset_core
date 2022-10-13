@@ -1,0 +1,81 @@
+<div class="titleU">__('Customize Columns')</div>
+
+{_form}
+	<div id="cols_list">
+	<!-- BEGIN list -->
+		<div class="radioTag">
+			<input type="checkbox" name="cols[]" id="cols{v}" value="{v}" <!-- IF curr -->checked="checked"<!-- ENDIF -->>
+			<label for="cols{v}">{II}. {title}</label>
+		</div>
+	<!-- END -->
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">__('Save')</button>
+</form>
+
+<script type="text/javascript">
+	$(function(){
+		$( '#cols_list' ).sortable();
+	})
+</script>
+
+<!-- IF can_define_cols -->
+
+<div class="titleU">
+	__('Define Columns')
+	<a href="/{p}/cols_diy?step=add" accesskey="A" class="ml-5"><i class="fa fa-plus text-primary"></i> __('Add New Column')</a>
+
+</div>
+
+<table class="table">
+	<thead>
+		<tr class="table-secondary">
+			<th>ID</th>
+			<th>__('Title')</th>
+			<th>__('Priority')</th>
+			<th>__('Type')</th>
+			<th>__('Optional values')</th>
+			<th>__('Action')</th>
+		</tr>
+	</thead>
+	<!-- BEGIN cols_defined -->
+	<tr>
+		<td>{id}</td>
+		<td>
+			{title}
+			<!-- IF readonly --><div class="badge badge-danger">Read only</div><!-- ENDIF -->
+		</td>
+		<td>
+			{priority}
+		</td>
+		<td>
+			{type}
+		</td>
+		<td>
+
+			<!-- IF type=="member" -->
+				<!-- BEGIN _member_groups --><span class="badge badge-info ml-1">{title}</span><!-- END -->
+			<!-- ELSEIF type=="mirror" -->
+				{_mirror}
+			<!-- ELSE -->
+				<!-- BEGIN _dropdown_list -->
+				<font style="color: #fff; font-size: 12px; padding: 2px 5px; border-radius: 2px; background-color: <!-- IF color -->{color}<!-- ELSE -->#b3b3b3<!-- ENDIF -->;">{title}</font>
+				<!-- END -->
+			<!-- ENDIF -->
+
+			<!-- IF _disabled_admin_tags -->
+			<div class="alert alert-warning my-1 p-2">
+				__('Disabled Groups'):
+				<!-- BEGIN _disabled_admin_tags --><span class="badge badge-pill badge-danger mr-1">{title}</span><!-- END -->
+			</div>
+			<!-- ENDIF -->
+		</td>
+		<td>
+		<a href="/{p}/cols_diy?step=edit&id={id}"><i class="fa fa-pencil-square-o"></i></a>
+			<a href="/{p}/cols_diy?step=del&id={id}" class="ml-3 text-danger cfm"><i class="fa fa-times"></i></a>
+		</td>
+	</tr>
+	<!-- END -->
+</table>
+
+<!-- ENDIF -->

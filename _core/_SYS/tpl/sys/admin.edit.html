@@ -1,0 +1,156 @@
+<div class="titleU d-flex">
+	Edit Admin ID: {row.id}
+	<a href="javascript:;" class="back ml-auto">Back</a>
+</div>
+
+{_form}
+	<div class="form-group row">
+		<label class="col col-lg-1">Username:</label>
+		<div class="col col-lg-3">
+			<input type="text" name="name" value="{row.name}" placeholder="Login name" required />
+		</div>
+		<label class="col col-lg-1">Truename:</label>
+		<div class="col col-lg-2">
+			<input type="text" name="truename" value="{row.truename}" placeholder="Truename" required />
+		</div>
+		<label class="col col-lg-1">ID Name:</label>
+		<div class="col col-lg-2">
+			<input type="text" name="idname" value="{row.idname}" placeholder="Realname" />
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col col-lg-1">Mobile:</label>
+		<div class="col col-lg-3">
+			<input type="text" name="mobile" value="{row.mobile}" placeholder="Mobile" required />
+			<div class="desc">Must contain <code>+</code> for non-US numbers</div>
+		</div>
+		<label class="col col-lg-1">Email:</label>
+		<div class="col col-lg-3">
+			<input type="text" name="email" value="{row.email}" placeholder="Email" />
+		</div>
+		<label class="col col-lg-1">Password:</label>
+		<div class="col col-lg-3">
+			<input type="text" name="pswd" placeholder="Keep empty if no change" />
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col col-lg-1">Notes:</label>
+		<div class="col col-lg-10">
+			<input type="text" name="ps" value="{row.ps}" autocomplete="off" />
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col col-lg-1">
+			Menu:<br /><br />
+			<div class="radioTag mini">
+				<input type="checkbox" name="root" id="root" value="1" <!-- IF row.root --> checked="checked"<!-- ENDIF --> />
+				<label for="root">ROOT</label>
+			</div>
+		</div>
+		<div class="col col-lg-10<!-- IF row.root --> hide2<!-- ENDIF -->" id="privdetail">
+			<table class="table table-striped table-bordered">
+				<!-- BEGIN priv_lists -->
+				<tr>
+					<td>
+						<div class="radioTag mini">
+							<input type="checkbox" name="privilege[{p0}]" id="privilege{p0}" value="1" data-p="{p0}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+							<label for="privilege{p0}">{title}</label>
+						</div>
+					</td>
+					<td>
+						<!-- IF priv_lists -->
+						<!-- BEGIN priv_lists -->
+							<div class="radioTag mini">
+								<input type="checkbox" name="privilege[{p0}][{p1}]" id="privilege{p0}{p1}" value="1"  data-c="{p0}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+								<label for="privilege{p0}{p1}">{title}</label>
+							</div>
+						<!-- END -->
+						<!-- ENDIF -->
+					</td>
+				</tr>
+				<!-- END -->
+			</table>
+		</div>
+	</div>
+
+	<div class="form-group row border-top border-bottom border-secondary p-3">
+		<label class="col col-lg-1">Special Privilege:</label>
+		<div class="col col-lg-10">
+		<!-- BEGIN priv_tags -->
+			<div class="radioTag mini">
+				<input type="checkbox" name="priv_tags[]" id="priv_tags{tag}" value="{tag}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+				<label for="priv_tags{tag}">{title}</label>
+			</div>
+		<!-- END -->
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col col-lg-1">Groups:</label>
+		<div class="col col-lg-10">
+		<!-- BEGIN admin_tags -->
+			<div class="radioTag">
+				<input type="checkbox" name="admin_tags[]" id="admin_tags{id}" value="{id}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+				<label for="admin_tags{id}">{title}</label>
+			</div>
+		<!-- END -->
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<div class="col col-lg-1">
+			Disabled Cols:
+			<div class="alert alert-warning">For access control on detail pages, please let Hai knows after changed settings.</div>
+		</div>
+		<div class="col col-lg-11">
+			<table class="table table-striped table-bordered">
+				<!-- BEGIN cols_defines -->
+				<tr>
+					<td>
+						{title}
+						<div class="radioTag mini">
+							<input type="checkbox" name="cols_defines[]" id="cols_defines{menu}" value="{menu}" <!-- IF curr_can_define -->checked="checked"<!-- ENDIF --> />
+							<label for="cols_defines{menu}">Col Define</label>
+						</div>
+					</td>
+					<td>
+						<!-- BEGIN list_col -->
+							<div class="radioTag mini">
+								<input type="checkbox" name="cols_disabled[{menu}][]" id="cols_disabled{menu}-{col}" value="{col}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+								<label for="cols_disabled{menu}-{col}">{title}</label>
+							</div>
+						<!-- END -->
+					</td>
+				</tr>
+				<!-- END -->
+			</table>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success" accesskey="Z">Update Admin</button>
+</form>
+
+<script>
+$('[name=root]').click(function(){
+	var ck = $(this).prop('checked');
+	if(ck && !confirm('Warning: It will be root.')) {
+		return false;
+	}
+	$('#privdetail').toggle(!ck);
+
+});
+
+$('[data-p]').click(function(){
+	var ck = $(this).prop('checked');
+	$('[data-c="' + $(this).data('p') + '"]').prop('checked', ck);
+});
+
+$('[data-c]').click(function(){
+	var ck = $('[data-c="' + $(this).data('c') + '"]:checked')[0] ? true : false;
+	$('[data-p="' + $(this).data('c') + '"]').prop('checked', ck);
+});
+
+</script>

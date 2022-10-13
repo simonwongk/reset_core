@@ -1,0 +1,19 @@
+<div class="titleU">__('Add')</div>
+
+{_form}
+	<div class="form-group row">
+		<label for="title" class="col-3">__('String'):</label>
+		<div class="col-9"><input name="title" id="title" type="text" required autofocus /></div>
+	</div>
+	<div class="form-group row">
+		<label for="lang_zh" class="col-3">__('Chinese Translation'):</label>
+		<div class="col-9"><input name="lang_zh" id="lang_zh" type="text" /></div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">__('Operator'):</label>
+		<div class="col-9">{_S.acp_truename}</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">__('Insert')</button>
+	<div class="pull-right"><input name="goon" type="checkbox" value="1" data-toggle="toggle" data-on="__('Continue')" data-off="__('Continue')" <!-- IF goon --> checked="checked"<!-- ENDIF --> /></div>
+</form>

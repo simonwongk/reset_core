@@ -1,0 +1,19 @@
+<!-- IF cols_list -->
+<div class="row col_diy alert alert-secondary">
+	<!-- BEGIN cols_list -->
+		<label class="col-<!-- IF is_modal -->2<!-- ELSE -->1<!-- ENDIF --> mb-3 coldiy-{col.id}">
+			__({col.title})<!-- IF readonly --><sup title="Read only" class="text-secondary">*</sup><!-- ENDIF -->:
+		</label>
+		<div class="col-<!-- IF is_modal -->4<!-- ELSE -->2<!-- ENDIF --> coldiy-{col.id}">
+			<div class="ccell_val">{val}</div>
+		</div>
+	<!-- END -->
+</div>
+<!-- ENDIF -->
+
+<div class="coldiy_picker_root">
+	<div class="coldiy_picker_title">__('Select')</div>
+	<div class="coldiy_picker_container col_diy">
+		<!-- <div class="coldiy_picker_list custom_col_editable" style="background-color: rgb(226, 68, 92);">high</div> -->
+	</div>
+</div>

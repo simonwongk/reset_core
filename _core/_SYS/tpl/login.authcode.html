@@ -1,0 +1,31 @@
+<div class="row" style="height: 80vh;">
+	<div class="col-lg-4 offset-lg-4 col-xs-12 border border-light p-5 align-self-center shadow-lg">
+		<!-- IF security_type=="mobile" -->
+		<div class="titleU w-25">__('Mobile Verify')</div>
+		<div class="alert alert-info" role="alert">
+			__('Dynamic code has sent to') (***)***-{mobile} (Tag: {tag})
+		</div>
+		<!-- ELSE -->
+		<div class="titleU w-25">__('2FA Verify')</div>
+		<!-- ENDIF -->
+		<form class="form-signin" action="/login" method="post" role="form">
+			<input type="hidden" name="action" value="smsLogin" />
+			<input type="hidden" name="ref" value="{ref}" />
+			<div class="form-group">
+				<input type="number" name="smscode" placeholder="<!-- IF security_type=="mobile" -->__('Mobile Text')(__('Dynamic code'))<!-- ELSE -->2FA Code<!-- ENDIF -->" required autofocus /></label>
+			</div>
+			<button type="submit" class="btn btn-lg btn-success btn-block">__('Verify')</button>
+		</form>
+	</div>
+</div>
+
+<script>
+	$(function(){
+		$('[name="smscode"]').keyup(function(){
+			if ( $(this).val().length == <!-- IF security_type=="mobile" -->4<!-- ELSE -->6<!-- ENDIF --> ) {
+				console.log('smscode matched length, submitting form');
+				$('form').submit();
+			}
+		})
+	});
+</script>

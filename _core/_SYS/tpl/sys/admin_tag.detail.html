@@ -1,0 +1,27 @@
+<div class="titleU d-flex">
+	View ID: {row.id}
+	<div class="ml-auto">
+		<a href="/{p}/{row.id}/edit" class="btn btn-primary">Edit</a>
+		<a href="/{p}/{row.id}/lock" class="btn btn-warning"><!-- IF row.active -->Lock<!-- ELSE -->Unlock<!-- ENDIF --></a>
+	</div>
+</div>
+
+<div class="form-horizontal">
+	<div class="form-group row">
+		<label class="col-3">Title:</label>
+		<div class="col-9 border-bottom border-secondary">{row.title}</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">Last Operator:</label>
+		<div class="col-9 border-bottom border-secondary">{row.lastacp_truename}</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">Log:</label>
+		<ul class="col-9 border-bottom border-secondary">
+			<!-- BEGIN actlog -->
+			<li class="list-group-item small px-1 py-2">{truename} {info} <font class="desc">{dateline_DATE_m-d H:i}</font></li>
+			<!-- END -->
+		</ul>
+	</div>
+</div>
+

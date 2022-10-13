@@ -1,0 +1,188 @@
+<div class="titleU">__('Update Column Data') ID: {data_row.id}</div>
+
+<style type="text/css">
+	.option_curr::before {
+		content: '';
+		/*opacity: 0;*/
+		color: #105E28;
+		position: absolute;
+		left: 0;
+		top: 0;
+		border-style: solid;
+		border-width: 10px 10px 0 0;
+		border-color: #f9ef4b transparent transparent transparent;
+	}
+
+	.option_curr::after {
+		content: '';
+		/*opacity: 0;*/
+		color: #105E28;
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		border-style: solid;
+		border-width: 0 0 10px 10px;
+		border-color: transparent transparent #007bff transparent;
+	}
+
+
+	div.col_diy {
+		flex-wrap: wrap;
+	}
+
+	div.col_diy, div.col_diy:hover {
+		background-color: initial;
+	}
+</style>
+
+<!-- IF data_row.title -->
+	<div class="form-group row">
+		<label class="col-1">__('Title'):</label>
+		<div class="col-10">
+			{data_row.title}
+		</div>
+	</div>
+<!-- ENDIF -->
+
+
+{_form}
+	<input type="hidden" name="step" value="set" />
+	<input type="hidden" name="fid" value="{fid}" />
+	<input type="hidden" name="el" value="{el}" />
+
+	<div class="form-group row">
+		<label class="col-1">__('Column'):</label>
+		<div class="col-5 font-weight-bold">
+			{col_info.title}
+		</div>
+	</div>
+
+	<!-- IF col_info.type=="dropdown" -->
+	<div class="col_diy d-flex">
+		<!-- BEGIN col_list -->
+		<div class="custom_col custom_col_editable custom_col_dropdown d-block my-3 mx-1 <!-- IF curr --> border border-success<!-- ENDIF -->">
+			<a href="{link}" class="clickable_block px-3 <!-- IF curr --> option_curr<!-- ENDIF -->" style="color:#fff;background-color:<!-- IF color -->{color}<!-- ELSE -->#8f8f8f<!-- ENDIF -->;" data-accesskey-i>
+				<!-- IF II<="9" -->{II}. <!-- ENDIF -->
+				<!-- IF title -->{title}<!-- ELSE -->X<!-- ENDIF -->
+			</a>
+		</div>
+		<!-- END -->
+	</div>
+	<!-- ELSEIF col_info.type=="member" -->
+	<div class="form-group row">
+		<label class="col-auto">
+			<!-- IF assign_to_me -->
+				<a href="{assign_to_me}" class="btn btn-success" accesskey="1">1. __('Assign to Me')</a>
+			<!-- ENDIF -->
+			<a href="{link}" class="btn btn-success" accesskey="2">2. __('Unassign')</a>
+		</label>
+		<div class="col-5">
+			<select name="val">
+					<option value="">-</label>
+				<!-- BEGIN col_list -->
+					<option <!-- IF curr -->selected<!-- ENDIF --> value="{id}">{II}. {truename}</option>
+				<!-- END -->
+			</select>
+		</div>
+
+		<div class="col">
+			<button type="submit" class="btn btn-xs btn-success">__('Update')</button>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col col_diy d-flex">
+			<!-- BEGIN col_list -->
+			<div class="custom_col custom_col_editable custom_col_dropdown d-block mt-1 mx-1 <!-- IF curr -->border border-success<!-- ENDIF -->">
+				<a href="{link}" class="clickable_block <!-- IF curr --> option_curr<!-- ENDIF -->" data-accesskey-i>{truename}</a>
+			</div>
+			<!-- END -->
+		</div>
+	</div>
+	<!-- ELSE -->
+		<!-- IF col_info.type=="number" -->
+		<div class="form-group row">
+			<label class="col-1">__('Value'):</label>
+			<div class="col-5">
+				<input type="number" name="val" value="{existing_data}" autofocus />
+			</div>
+		</div>
+		<!-- ELSEIF col_info.type=="date" -->
+		<div class="form-group row">
+			<label class="col-1">__('Value'):</label>
+			<div class="col-5">
+				<input type="date" name="val" value="{existing_data}" autofocus />
+			</div>
+		</div>
+		<!-- ELSEIF col_info.type=="email" -->
+		<div class="form-group row">
+			<label class="col-1">__('Value'):</label>
+			<div class="col-5">
+				<input type="email" name="val" value="{existing_data}" autofocus />
+			</div>
+		</div>
+		<!-- ELSEIF col_info.type=="geo" -->
+		<div class="form-group row">
+			<label class="col-1">__('Address'):</label>
+			<div class="col-5">
+				<input type="text" name="val" value="{existing_data}" autofocus id="geo_search" />
+			</div>
+		</div>
+		<script src="https://maps.googleapis.com/maps/api/js?key={google_geo_key}&libraries=places&v=weekly&channel=2&callback=initService" async></script>
+		<script>
+			function initService() {
+				const geo_svc = new google.maps.places.SearchBox(document.getElementById('geo_search'));
+			}
+		</script>
+		<!-- ELSEIF col_info.type=="link" -->
+		<div class="form-group row">
+			<label class="col-1">__('Web Address'):</label>
+			<div class="col-5">
+				<input type="text" name="val[url]" value="{existing_data.url}" autofocus />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-1">__('Text to Display'):</label>
+			<div class="col-5">
+				<input type="text" name="val[text]" value="{existing_data.text}" />
+			</div>
+		</div>
+		<!-- ELSE -->
+		<div class="form-group row">
+			<label class="col-1">__('Value'):</label>
+			<div class="col-5">
+				<input type="text" name="val" value="{existing_data}" autofocus />
+			</div>
+		</div>
+		<!-- ENDIF -->
+
+		<button type="submit" class="btn btn-lg btn-success">__('Update')</button>
+	<!-- ENDIF -->
+</form>
+
+<script>
+	function coldiy_ajax_cb(data) {
+		if ( ! data.hasOwnProperty( 'id' ) || ! data.hasOwnProperty( 'td' ) ) {
+			console.log( 'column update res', data );
+			alert( 'Failed to update column value' );
+			return;
+		}
+
+		console.log('coldiy_ajax_cb');
+		window.parent.$('#'+data.id).replaceWith(data.td);
+		window.parent.m.modal_on_a( '#'+data.id );
+		m.jx();
+	}
+
+	$(function(){
+		$('a').click(function(e){
+			e.preventDefault();
+			console.log('coldiy set a clicked');
+			$.post( $(this).attr('href'), coldiy_ajax_cb );
+		});
+		$('form').submit(function(e){
+			e.preventDefault();
+			console.log('coldiy set form_submitted');
+			$.post( $(this).attr('action'), $(this).serialize(), coldiy_ajax_cb );
+		})
+	});
+</script>

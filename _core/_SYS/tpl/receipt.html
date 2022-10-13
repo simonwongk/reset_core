@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Receipt</title>
+</head>
+<body style="padding: 10px;text-align: center;">
+	<div style="float: right;">Term ID: {invoice_info.id}</div>
+	<h2>Payment - Approved</h2>
+	<table style="width:100%;">
+		<tr>
+			<td>Date</td>
+			<td><!-- IF invoice_info.payment_dateline -->{invoice_info.payment_dateline_DATE_m/d/Y}<!-- ELSE -->Not Paid Yet<!-- ENDIF --></td>
+			<td>Time</td>
+			<td><!-- IF invoice_info.payment_dateline -->{invoice_info.payment_dateline_DATE_H:i:s}<!-- ELSE -->-<!-- ENDIF --></td>
+		</tr>
+		<tr>
+			<td>Method of Payment</td>
+			<td colspan="3"><!-- IF invoice_info.payment_card.0 -->{invoice_info.payment_card.0}<!-- ENDIF --></td>
+		</tr>
+		<tr>
+			<td>Account #</td>
+			<td colspan="3"><!-- IF invoice_info.payment_card.1 -->######################{invoice_info.payment_card.1}<!-- ENDIF --></td>
+		</tr>
+		<tr>
+			<td colspan="4"></td>
+		</tr>
+		<tr>
+			<td>Order ID</td>
+			<td colspan="3">{invoice_info.payment_name}</td>
+		</tr>
+		<!-- IF additional_info -->
+		<tr>
+			<td>{additional_info.title}</td>
+			<td colspan="3">{additional_info.val}</td>
+		</tr>
+		<!-- ENDIF -->
+		<tr style="font-weight: bold;">
+			<td>Amount</td>
+			<td colspan="3">${invoice_info.price}.00</td>
+		</tr>
+	</table>
+
+	<div style="margin-top: 200px;text-align: center;">Customer Copy</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-md-8">
+		Search format:
+		<code>uid=3</code> or
+		<code>action=lock</code> or
+		<code>submit=1</code> or
+		<code>p0=bkw</code> or
+		<code>p1=bkw_call</code> or
+		<code>p=bkw.bkw_call</code> or
+		<code>info=操作內容片段</code>
+		<br>空格隔開多個條件。注意: lock/刪除操作因爲不是表單提交，所以submit不是1.
+	</div>
+
+	<div class="col-md-4">
+		{_form_search}
+		<div class="input-group">
+			<input type="text" name="o00" value="{o00}" placeholder="空格隔开">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit">Search</button>
+			</span>
+		</div>
+		</form>
+	</div>
+</div>
+
+<table class="table table-hover">
+	<thead><tr>
+		<th width="5%">ID</th>
+		<th style="width:180px;">分类</th>
+		<th>操作内容</th>
+		<th width="10%">操作人</th>
+		<th width="15%">操作时间</th>
+		<th width="10%">动作(是否提交)</th>
+	</tr></thead>
+	<tbody>
+<!-- BEGIN list -->
+	<tr>
+		<td>{id}</td>
+		<td>
+			{p0title}->{p1title}
+			<div class="mt-2">p0: {p0}</div>
+			<div class="mt-1">p1: {p1}</div>
+		</td>
+		<td <!-- IF submit -->class="bg-cyan"<!-- ENDIF -->>{info}</td>
+		<td>{acp_truename}</td>
+		<td>{dateline_DATE_H:i m/d/y}</td>
+		<td>{action}<!-- IF submit=="1" -->(提交)<!-- ENDIF --></td>
+	</tr>
+<!-- END -->
+	</tbody>
+</table>
+
+<ul class="pagination">{pagelink}</ul>

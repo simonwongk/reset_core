@@ -1,0 +1,31 @@
+<div class="titleU d-flex">
+	__('View') ID: {row.id}
+	<a href="/{p}/{row.id}/delete" class="btn btn-danger btn-sm cfm ml-5" accesskey="D">__('Delete')</a>
+	<div class="ml-auto">
+		<a href="/{p}/{row.id}/edit" class="btn btn-primary">__('Edit')</a>
+	</div>
+</div>
+
+<div class="form-horizontal">
+	<div class="form-group row">
+		<label class="col-3">__('String'):</label>
+		<div class="col-9 border-bottom border-secondary">{row.title}</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">__('Chinese Translation'):</label>
+		<div class="col-9 border-bottom border-secondary">{row.lang_zh}</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">__('Last Operator'):</label>
+		<div class="col-9 border-bottom border-secondary">{row.lastacp_truename}</div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">__('Log'):</label>
+		<ul class="col-9 border-bottom border-secondary">
+			<!-- BEGIN actlog -->
+			<li class="list-group-item small px-1 py-2">{truename} {info} <font class="desc">{dateline_DATE_m-d H:i}</font></li>
+			<!-- END -->
+		</ul>
+	</div>
+</div>
+

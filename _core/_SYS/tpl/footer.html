@@ -1,0 +1,40 @@
+<!-- IF nav -->
+</div>
+<!-- ENDIF -->
+
+<div class="e_wholecover" id="root_cover"></div>
+<iframe name="hidden" src="" width="0" height="0" frameborder="0"></iframe>
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+		<div class="modal-content position-relative">
+			<button type="button" noLoading class="close position-absolute p-1 modal_close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<iframe name="modalIframe" id="modalIframe" src="" style="zoom:0.60" frameborder="0" height="1000" width="99.6%"></iframe>
+		</div>
+	</div>
+</div>
+
+<!-- IF nav -->
+<footer class="footer">
+	<!-- IF PER_PAGE -->
+	<form action="/{p}" method="get">
+		<div class="pagelink">
+			<input type="text" name="per_page" value="{PER_PAGE}" class="" nostyles>
+		</div>
+	</form>
+	 <div class="mr-3 desc">/ __('page')</div>
+	<!-- ENDIF -->
+
+	<div class="mr-3 desc">
+		<a href="?_lang=en" class="<!-- IF LANG=="en" --> text-success<!-- ELSE --> text-secondary<!-- ENDIF -->" title="Switch Language to English">En</a> /
+		<a href="?_lang=zh" class="<!-- IF LANG=="zh" --> text-success<!-- ELSE --> text-secondary<!-- ENDIF -->" title="切換語言爲中文">中</a>
+	</div>
+
+	<div class="desc">{TS_DATE_Y-m-d H:i:s} {C_totaltime}s {C_dbcount}queries</div>
+</footer>
+<!-- ENDIF -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div class="titleU d-flex">
+	__('Enable 2FA')
+	<a href='/login?action=profile&modal=1' class="ml-auto">__('Back')</a>
+</div>
+
+<form class="form-signin" action="/login?modal=1" method="post" role="form">
+	<input type='hidden' name='submit2' value='true' />
+	<input type="hidden" name="action" value="enable_2fa" />
+
+	<div class="row mb-3">
+		<div class="col-12 h3">
+			__('Please scan this barcode w/ your phone 2FA app (e.g. Google Authenticator) and type the code in 2FA app below')
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		<label class="col-12 col-lg-2">__('Barcode')</label>
+		<div class="col-6">
+			<img src='{qrCodeUrl}' />
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		<label class="col-12 col-lg-2">__('2FA Code')</label>
+		<div class="col-2">
+			<input name="code" id="code" type="text" />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success" accesskey="Z"> __('Verify')</button>
+</form>

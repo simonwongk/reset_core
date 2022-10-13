@@ -1,0 +1,15 @@
+<div class="container mt-1">
+	<div class="border border-{type} p-3 m-3">
+		<h2 class="text-{type}">{msg_title}</h2>
+
+		<div class="text-{type} m-3">
+			{msg}
+		</div>
+
+		<!-- IF links=="self.close" --><a href="javascript:;" class="btn btn-primary" onclick="parent.m.j();">__('Continue')</a>
+		<!-- ELSE -->
+			<!-- IF links --><a href="{links}" class="btn btn-success m-3">__('Back')</a><!-- ENDIF -->
+		<!-- ENDIF -->
+	</div>
+
+</div>

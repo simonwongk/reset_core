@@ -1,0 +1,19 @@
+<div class="titleU">__('Upload')<!-- IF type --> {type_title}<!-- ENDIF --></div>
+
+{_form}<input type="hidden" name="type" value="{type}" />
+	<div class="form-group row">
+		<label class="col-1">__('File'):</label>
+		<div class="col-11">
+			<input type='file' name='attach' data-title="__('Max size'): 50M" />
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col-1">__('Description'):</label>
+		<div class="col-11">
+			<input type='text' name='description' />
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">__('Upload')</button>
+</form>

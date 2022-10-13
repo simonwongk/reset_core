@@ -1,0 +1,75 @@
+<div class="row">
+	<div class="col-auto">
+		<a href="/{p}/add" class="btn btn-primary" accesskey="A" target="modal">Add</a>
+	</div>
+
+	<div class="col filter_selector">
+	</div>
+
+	<div class="col-6 col-lg-5">
+		{_form_search}
+		<div class="input-group">
+			<input type="text" name="o00" value="{o00}" placeholder="Title/ID">
+			<span class="input-group-btn">
+				<button class="btn btn-secondary" type="submit">Search</button>
+			</span>
+		</div>
+		</form>
+	</div>
+</div>
+
+<div class="filter">
+	{curr_filters}
+	<div class="pull-right pageDiv">
+
+		<ul class="pagination pagination-sm">{pagelink}</ul>
+
+		<div class="btn-group btn-group-sm">
+			<a href='/{p}?s95=1&o95=1' class="btn btn-outline-secondary<!-- IF o95=="1" --> active<!-- ENDIF -->">Trash</a>
+			<a href='/{p}?s95=1&o95=2' class="btn btn-outline-secondary<!-- IF o95=="2" --> active<!-- ENDIF -->">All</a>
+		</div>
+
+		<div class="mr-1">
+			Total: <b>{total}</b>
+		</div>
+	</div>
+</div>
+
+<table class="table table-striped">
+	<thead><tr>
+		<th>
+			<a href="/{p}?s01=1&o01=id&o01order=<!-- IF o01link=="id.desc" -->asc<!-- ELSEIF o01link=="id.asc" -->desc<!-- ENDIF -->" title="Click to order by ID">ID</a><!-- IF o01link=="id.desc" -->↓<!-- ELSEIF o01link=="id.asc" -->↑<!-- ENDIF -->
+		</th>
+		<th>Title</th>
+		<th>
+			<a href="/{p}?s01=1&o01=lastdateline&o01order=<!-- IF o01link=="lastdateline.desc" -->asc<!-- ELSEIF o01link=="lastdateline.asc" -->desc<!-- ENDIF -->" title="Click to order by last modification">Modified</a><!-- IF o01link=="lastdateline.desc" -->↓<!-- ELSEIF o01link=="lastdateline.asc" -->↑<!-- ENDIF -->
+		</th>
+	</tr></thead>
+	<tbody>
+<!-- BEGIN list -->
+	<tr <!-- IF active!="1" --> class="del" title="Deleted"<!-- ENDIF -->>
+		<td><a href="/{p}/{id}" target="modal"<!-- IF II<"10" --> accesskey="{II}"<!-- ENDIF -->>{id}</a></td>
+		<td>
+			<a href="/{p}/{id}" target="modal">{title}</a>
+		</td>
+		<td>{lastdateline_DATE_m/d/y} {lastacp_truename}</td>
+	</tr>
+<!-- END -->
+	</tbody>
+</table>
+<!-- IF !list -->
+<h2 class="text-center">
+	No list
+</h2>
+<!-- ENDIF -->
+
+<div class="filter">
+	<div class="pull-right pageDiv">
+
+		<ul class="pagination pagination-sm">{pagelink}</ul>
+
+		<div class="mr-1">
+			Total: <b>{total}</b>
+		</div>
+	</div>
+</div>

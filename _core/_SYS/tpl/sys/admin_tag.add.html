@@ -1,0 +1,15 @@
+<div class="titleU">Add</div>
+
+{_form}
+	<div class="form-group row">
+		<label for="title" class="col-3">Title:</label>
+		<div class="col-9"><input name="title" id="title" type="text" required autofocus /></div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">Operator:</label>
+		<div class="col-9">{_S.acp_truename}</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">Insert</button>
+	<div class="pull-right"><input name="goon" type="checkbox" value="1" data-toggle="toggle" data-on="繼續添加" data-off="繼續添加" <!-- IF goon --> checked="checked"<!-- ENDIF --> /></div>
+</form>

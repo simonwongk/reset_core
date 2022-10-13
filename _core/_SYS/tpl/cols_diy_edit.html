@@ -1,0 +1,114 @@
+<div class="titleU">Edit Column ID: {row.id}</div>
+
+{_form}
+	<input type="hidden" name="step" value="edit" />
+	<div class="form-group row">
+		<label class="col-1">Title:</label>
+		<div class="col-4">
+			<input type="text" name="title" placeholder="Title" value="{row.title}" required />
+		</div>
+		<div class="col-2">
+			<div class="radioTag mini">
+				<input type="checkbox" name="readonly" id="readonly" value="1" <!-- IF row.readonly -->checked<!-- ENDIF --> />
+				<label for="readonly">Read only</label>
+			</div>
+
+			<div class="radioTag mini">
+				<input type="checkbox" name="reverse_search" id="reverse_search" value="1" <!-- IF row.reverse_search -->checked<!-- ENDIF --> title="__('This will add a reverse search option to filters')" />
+				<label for="reverse_search">Reverse Search</label>
+			</div>
+		</div>
+		<label class="col-1">Priority:</label>
+		<div class="col-2">
+			<input type="number" name="priority" placeholder="Priority" value="{row.priority}" />
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col-1">Disable Groups:</label>
+		<div class="col-11">
+			<!-- BEGIN disabled_admin_tags -->
+				<div class="radioTag mini">
+					<input type="checkbox" name="disabled_admin_tag_ids[]" id="disabled_admin_tag_ids{id}" value="{id}" <!-- IF curr -->checked<!-- ENDIF --> />
+					<label for="disabled_admin_tag_ids{id}">{title}</label>
+				</div>
+			<!-- END -->
+			<div class="desc">The admin groups chosen won't be able to see this column.</div>
+		</div>
+	</div>
+
+	<div class="form-group row">
+		<label class="col-1">Type:</label>
+		<div class="col-11">
+			<div class="hi-switch label-info">
+			<!-- BEGIN cols_defined_types -->
+				<input type="radio" name="type" id="type{v}" value="{v}" required <!-- IF curr -->checked<!-- ENDIF --> />
+				<label for="type{v}">{v}</label>
+			<!-- END -->
+			</div>
+		</div>
+	</div>
+	<div class="<!-- IF row.type!="dropdown" -->hide<!-- ENDIF -->" data-type="dropdown">
+		<div class="form-group row">
+			<label class="col-1">Dropdown Values:</label>
+			<div class="col-11">
+				<div class="label_div" id="label_div"></div>
+				<script type="text/javascript" src="/assets/js/_js/lib/react.min.js"></script>
+				<script src="/assets/js/_js/component/label/index.js?ver={ts}"></script>
+				<script type="text/javascript">
+					const props = {
+						 field: "dropdown",
+						 curr_list: {row._dropdown_list}
+					}
+					ReactDOM.render(
+						React.createElement( label, props ),
+						document.getElementById( 'label_div' )
+					);
+				</script>
+			</div>
+		</div>
+	</div>
+	<div class="<!-- IF row.type!="member" -->hide<!-- ENDIF -->" data-type="member">
+		<div class="form-group row">
+			<label class="col-1">Member Group:</label>
+			<div class="col-11">
+				<!-- BEGIN admin_tags -->
+					<div class="radioTag">
+						<input type="checkbox" name="admin_tags[]" id="admin_tags{id}" value="{id}" <!-- IF curr -->checked="checked"<!-- ENDIF --> />
+						<label for="admin_tags{id}">{title}</label>
+					</div>
+				<!-- END -->
+				<div class="desc">Members in any of above groups will be selectable</div>
+			</div>
+		</div>
+	</div>
+	<div class="<!-- IF row.type!="mirror" -->hide<!-- ENDIF -->" data-type="mirror">
+		<div class="form-group row">
+			<label class="col-1">Mirror:</label>
+			<div class="col-7">
+				<select name="mirror" style="width:100%;">
+					<!-- BEGIN mirror_list -->
+					<option value="{id}" <!-- IF curr -->selected<!-- ENDIF -->>{_p} => {title} </option>
+					<!-- END -->
+				</select>
+				<div class="desc">__('Only when records&#39; mapping IDs are different, need to set the next field column')</div>
+			</div>
+			<div class="col-4">
+				<input type="text" name="mirror_id" placeholder="__('Mirror mapping ID of current table')" value="{mirror_id}" />
+			</div>
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">Update</button>
+</form>
+
+<script>
+	$(function(){
+		$('[name=type]').click(function(){
+			$('[data-type]').hide();
+			if ( this.value == 'dropdown' || this.value == 'member' || this.value == 'mirror' ) {
+				$('[data-type=' + this.value + ']').show();
+			}
+		});
+	});
+</script>

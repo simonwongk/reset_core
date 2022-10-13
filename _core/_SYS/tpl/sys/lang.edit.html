@@ -1,0 +1,21 @@
+<div class="titleU d-flex">
+	__('Edit') ID: {row.id}
+	<a href="javascript:;" class="back ml-auto">__('Back')</a>
+</div>
+
+{_form}
+	<div class="form-group row">
+		<label for="title" class="col-3">__('String'):</label>
+		<div class="col-9"><input name="title" id="title" type="text" value="{row.title}" /></div>
+	</div>
+	<div class="form-group row">
+		<label for="lang_zh" class="col-3">__('Chinese Translation'):</label>
+		<div class="col-9"><input name="lang_zh" id="lang_zh" type="text" value="{row.lang_zh}" required autofocus /></div>
+	</div>
+	<div class="form-group row">
+		<label class="col-3">__('Operator'):</label>
+		<div class="col-9">{_S.acp_truename}</div>
+	</div>
+
+	<button type="submit" class="btn btn-lg btn-success">__('Update')</button>
+</form>

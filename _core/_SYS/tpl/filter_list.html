@@ -1,0 +1,20 @@
+	<!-- IF list -->
+		<!-- BEGIN list -->
+			<!-- IF title_prefix -->
+			<font class="filter_prefix">
+				{title_prefix}
+				<!-- IF reverse_search -->(__('Reverse'))<!-- ENDIF -->
+			</font>:
+			<!-- ENDIF -->
+			<span class="badge badge-success ml-1 white filter_present" title="__('Click to remove this filter')">
+				<a href="/{p}?s{o}=1&del={v}" <!-- IF II="1" -->accesskey="D"<!-- ENDIF -->>{title} <i class="fa fa-times text-warning"></i></a>
+			</span>
+		<!-- END -->
+	<!-- ENDIF -->
+
+<div class="coldiy_picker_root">
+	<div class="coldiy_picker_title">__('Select')</div>
+	<div class="coldiy_picker_container col_diy">
+		<!-- <div class="coldiy_picker_list custom_col_editable" style="background-color: rgb(226, 68, 92);">high</div> -->
+	</div>
+</div>

@@ -1,0 +1,85 @@
+<div class="titleU d-flex">
+	__('UserName')(ID): {_S.acp_name}({_S.acp_id})
+	<a href="/login?action=logoff" class="ml-auto btn btn-danger btn-sm" target="_parent">__('Logoff')</a>
+</div>
+
+<form action="/login" id="login" method="post" class="form-horizontal" role="form">
+	<input type='hidden' name='action' value='pswd' />
+	<input type='hidden' name='submit2' value='true' />
+	<div class="form-group row">
+		<label for="password" class="col-auto">__('Old Password'):</label>
+		<div class="col-3"><input name="oldpswd" id="password" type="password" required autofocus /></div>
+
+		<label for="pswd" class="col-auto">__('New Password'):</label>
+		<div class="col-3"><input name="pswd" id="pswd" type="password" required /></div>
+		<div class="col-auto">
+			<button type="submit" class="btn btn-success">__('Update')</button>
+		</div>
+	</div>
+</form>
+
+<div class="alert alert-secondary row_fluid">
+<div class="titleU">__('Avatar')</div>
+<div class="form-group row">
+	<div class="col-auto">
+		<!-- IF acp.avatar -->
+		<div class="mb-5"><img src="/upload/avatars/{acp.avatar}" class="menu_avatar" /></div>
+		<!-- ENDIF -->
+
+		<a href="/login?action=logo_random" class="btn btn-warning btn-sm">__('Random Avatar')</a>
+	</div>
+	<div class="col">
+		<form action="/login" method="post" class="form-horizontal" enctype="multipart/form-data">
+			<input type='hidden' name='submit2' value='true' />
+			<input type="hidden" name="action" value="logo_upload" />
+			<input type="hidden" value="0" id="x" name="x" />
+			<input type="hidden" value="0" id="y" name="y" />
+			<input type="hidden" value="0" id="w" name="w" />
+			<input type="hidden" value="0" id="h" name="h" />
+
+			<div class="form-group row">
+				<div class="col-10">
+					<input type='file' name='attach' id='avatar_upload' data-thumbnail-target="/login?action=logo_upload&step=tmp" />
+					<script src="/assets/js/_js/avatar_upload.js?ver=1"></script>
+					__('JPG/PNG only. Max size 2M.')
+				</div>
+				<div class="col">
+					<button type="submit" class="btn btn-success mt-1" disabled id="avatar_upload_btn">__('Upload')</button>
+				</div>
+			</div>
+
+			<div id="target"></div>
+
+		</form>
+	</div>
+</div>
+</div>
+
+<div class="titleU">__('Login Security')</div>
+
+<div class="row">
+	<div class="col-6">
+		<!-- IF acp.secret_2fa -->
+		<a href="/login?action=disable_2fa" class="btn btn-primary btn-sm">__('Switch to Mobile Dynamic Code Login')</a>
+		<!-- ELSE -->
+		<button class="btn btn-secondary btn-sm">__('Switch to Mobile Dynamic Code Login')</button>
+		<!-- ENDIF -->
+		<div class="desc my-2">__('Clear 2FA login will switch back to mobile dynamic code to login.')</div>
+	</div>
+	<div class="col-6">
+		<a href="/login?action=enable_2fa&modal=1" class="btn btn-warning btn-sm">__('Switch to 2FA Login')</a>
+		<!-- IF acp.secret_2fa -->
+		<div class="desc">__('This will generate a new QR code. The previous 2FA will become invalid.')</div>
+		<!-- ELSE -->
+		<div class="desc my-2">__('Please make sure you installed Google Authenticator app on your phone before switching.')</div>
+		<!-- ENDIF -->
+	</div>
+</div>
+
+<div class="alert alert-secondary row_fluid">
+<div class="titleU">Language 語言</div>
+
+<a href="?_lang=en" class="m-3<!-- IF lang=="en" --> text-success<!-- ENDIF -->">English</a>
+<a href="?_lang=zh" class="m-3<!-- IF lang=="zh" --> text-success<!-- ENDIF -->">中文</a>
+
+</div>
